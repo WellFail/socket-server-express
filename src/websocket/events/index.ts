@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
-import disconnect from './disconnect';
 
+import disconnect from './disconnect';
 import join from './join';
 
 const ON_JOIN = 'join';
