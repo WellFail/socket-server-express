@@ -1,10 +1,10 @@
 import { Socket } from 'socket.io';
-import redis from '../../store/redis-storage';
+import localCache from '../../store/cache-storage';
 
 const join = (socket: Socket) => {
   return (userId: string): void => {
-    redis.set(userId, socket.id);
-    redis.set(socket.id, userId);
+    localCache.set({ key: userId, value: socket.id });
+    localCache.set({ key: socket.id, value: userId });
   };
 };
 

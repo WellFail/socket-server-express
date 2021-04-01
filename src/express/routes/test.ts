@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import redis from '../../store/redis-storage';
+import localCache from '../../store/cache-storage';
 import PriceStore from '../../store/price-store';
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.post('/', async (req: Request, res: Response) => {
 
   const socketServer = req.app.get('socketServer');
 
-  const socketId = await redis.get(id);
+  const socketId = localCache.get({ key: id });
   if (!socketId) return res.sendStatus(400);
 
   const price = PriceStore.getPrice({ cryptoCurrency: 'BTC' });
